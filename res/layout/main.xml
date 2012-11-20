@@ -9,5 +9,12 @@
     android:layout_height="wrap_content"
     android:text="Browser2Ram is now ready to use. Reboot to complete installation."
     />
+
+<Button
+    android:id="@+id/button1"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:text="Install Now!" />
+
 </LinearLayout>
 
