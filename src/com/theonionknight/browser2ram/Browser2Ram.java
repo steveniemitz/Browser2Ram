@@ -26,6 +26,10 @@ public class Browser2Ram extends BroadcastReceiver {
     {
     	os.writeBytes("rm -rf /data/data/com.android.browser/cache/*\n");
         os.writeBytes("mount -t tmpfs -o size=100m browser_cache /data/data/com.android.browser/cache\n");
+        
+        os.writeBytes("rm -rf /data/data/com.android.chrome/cache/*\n");
+        os.writeBytes("mount -t tmpfs -o size=100m chrome_cache /data/data/com.android.chrome/cache\n");
+        
         os.close();
     }
     
