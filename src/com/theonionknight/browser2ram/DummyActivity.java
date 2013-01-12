@@ -28,6 +28,7 @@ public class DummyActivity extends Activity
     
     private void CleanCache()
     {
+    	Log.d("Browser2Ram", "Installing...");
     	try
     	{
 	    	final Process su = Runtime.getRuntime().exec("su");
@@ -36,8 +37,11 @@ public class DummyActivity extends Activity
 	        os.writeBytes("killall com.android.browser\n");
 	        os.writeBytes("umount /data/data/com.android.browser/cache\n");
 	        
-	        os.writeBytes("killall com.android.chrome\n");
-	        os.writeBytes("umount /data/data/com.android.chrome/cache\n");
+	        //os.writeBytes("killall com.android.chrome\n");
+	        //os.writeBytes("umount /data/data/com.android.chrome/cache\n");
+
+	        //os.writeBytes("killall com.chrome.beta\n");
+	        //os.writeBytes("umount /data/data/com.chrome.beta/cache\n");
 	        
 	        Browser2Ram.MountCache(os);
     	} 

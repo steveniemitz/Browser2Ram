@@ -24,24 +24,25 @@ public class Browser2Ram extends BroadcastReceiver {
 
     public static void MountCache(DataOutputStream os) throws IOException
     {
-    	os.writeBytes("rm -rf /data/data/com.android.browser/cache/*\n");
-        os.writeBytes("mount -t tmpfs -o size=100m browser_cache /data/data/com.android.browser/cache\n");
-        
-        os.writeBytes("rm -rf /data/data/com.android.chrome/cache/*\n");
-        os.writeBytes("mount -t tmpfs -o size=100m chrome_cache /data/data/com.android.chrome/cache\n");
-        
+    	MountCache("/data/data/com.android.browser/cache", "browser_cache", os);
+    	//MountCache("/data/data/com.android.chrome/cache", "chrome_cache", os);
+    	//MountCache("/data/data/com.chrome.beta/cache", "chrome_beta_cache", os);
+    	
         os.close();
+    }
+    
+    private static void MountCache(String directory, String mountName, DataOutputStream os) throws IOException
+    {
+    	os.writeBytes("rm -rf " + directory + "/*\n");
+        os.writeBytes("mount -t tmpfs -o size=50m " + mountName + " " + directory + "\n");
     }
     
     private void onBootCompleted(Context context) {
         try {
             final Process su = Runtime.getRuntime().exec("su");
             final DataOutputStream os = new DataOutputStream(su.getOutputStream());
-            //final DataInputStream is = new DataInputStream(su.getInputStream());
-            	
             MountCache(os);
             
-            //Log.d("Browser2Ram", is.readUTF());
         } catch (Exception e) {
         	Log.d("Browser2Ram", e.toString());
             return;

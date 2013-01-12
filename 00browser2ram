@@ -1,0 +1,19 @@
+#!/system/bin/sh
+
+umount /data/data/com.android.browser/cache;
+rm -rf /data/data/com.android.browser/cache/*;
+mount -t tmpfs -o size=50m browser_cache /data/data/com.android.browser/cache;
+
+if [ -d /data/data/com.android.chrome ];
+then
+  umount /data/data/com.android.chrome/cache;
+  rm -rf /data/data/com.android.chrome/cache/*;
+  mount -t tmpfs -o size=50m chrome_cache /data/data/com.android.chrome/cache;  
+fi;
+
+if [ -d /data/data/com.chrome.beta ];
+then
+  umount /data/data/com.chrome.beta/cache;
+  rm -rf /data/data/com.chrome.beta/cache/*;
+  mount -t tmpfs -o size=50m chrome_cache_beta /data/data/com.chrome.beta/cache;  
+fi;
